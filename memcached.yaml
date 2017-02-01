@@ -1,0 +1,37 @@
+document: modulemd
+version: 1
+data:
+    summary: High Performance, Distributed Memory Object Cache
+    description: Memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
+    license:
+        module: [ MIT ]
+    dependencies:
+        buildrequires:
+            base-runtime: master
+        requires:
+            base-runtime: master
+    references:
+        community: https://fedoraproject.org/wiki/Modularity
+        documentation: https://fedoraproject.org/wiki/Fedora_Packaging_Guidelines_for_Modules
+        tracker: https://taiga.fedorainfracloud.org/project/modularity
+    profiles:
+        default:
+            rpms:
+                - memcached
+    components:
+        rpms:
+            memcached:
+                rationale: A dependency of tangerine.
+                ref: f25
+            generic-release:
+                rationale: build dependency
+                ref: f25
+            gpm:
+                rationale: build dependency
+                ref: f25
+            perl-Carp:
+                rationale: build dependency
+                ref: f25
+            perl-Exporter:
+                rationale: build dependency
+                ref: f25
