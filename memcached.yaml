@@ -18,20 +18,52 @@ data:
         default:
             rpms:
                 - memcached
+    api:
+        rpms:
+            - memcached
     components:
         rpms:
             memcached:
                 rationale: A dependency of tangerine.
                 ref: f25
+                buildorder: 10
             generic-release:
-                rationale: build dependency
-                ref: f25
-            gpm:
-                rationale: build dependency
+                rationale: build dependency.
                 ref: f25
             perl-Carp:
-                rationale: build dependency
+                rationale: build dependency.
                 ref: f25
             perl-Exporter:
-                rationale: build dependency
+                rationale: build dependency.
                 ref: f25
+            perl-constant:
+                rationale: build dependency.
+                ref: f25
+            perl-File-Path:
+                rationale: build dependency.
+                ref: f25
+            perl-parent:
+                rationale: build dependency.
+                ref: f25
+            perl-PathTools:
+                rationale: build dependency.
+                ref: f25
+            perl-Scalar-List-Utils:
+                rationale: build dependency.
+                ref: f25
+            perl-Socket:
+                rationale: build dependency.
+                ref: f25
+            perl-Text-Tabs+Wrap:
+                rationale: build dependency.
+                ref: f25
+            perl-threads:
+                rationale: build dependency.
+                ref: f25
+            perl-threads-shared:
+                rationale: build dependency.
+                ref: f25
+            perl-Unicode-Normalize:
+                rationale: build dependency.
+                ref: f25
+
