@@ -8,7 +8,7 @@ Memcached is High Performance, Distributed Memory Object Cache
 - openshift-template.yml - Template for OpenShift to memcached.
 
 
-## How to use the container over standard 25 port
+## How to use the container over standard 11211 port
 
 Command for running memcached docker container:
 
@@ -23,6 +23,24 @@ docker run -it -e CACHE_SIZE=128 \
     -p 11211:11211
 ```
 
+## How to run memcached as standalone container
+
+Copy memcached-container.service to ```/usr/lib/systemd/system/``` directory
+```bash
+sudo cp memcached-container.service /usr/lib/systemd/user/
+systemctl --user daemon-reload
+```
+
+Command for running memcached as standalone container:
+```bash
+systemctl start --user memcached-container
+```
+
+## How to stop memcached as standalone container
+Command for stopping memcached as standalone container:
+```bash
+systemctl stop --user memcached-container
+```
 ## How to test the memcached
 
 Commands for testing memcached docker container:
