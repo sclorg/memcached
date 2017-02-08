@@ -77,3 +77,36 @@ To clear the metadata statistics
 ```bash
 flush all
 ```
+
+Memcached Server Telnet Example (taken from http://www.journaldev.com/16/memcached-telnet-commands-with-example)
+```bash
+set Test 0 100 10
+JournalDev
+STORED
+get Test
+VALUE Test 0 10
+JournalDev
+END
+replace Test 0 100 4
+Temp
+STORED
+get Test
+VALUE Test 0 4
+Temp
+END
+stats items
+STAT items:1:number 1
+STAT items:1:age 19
+STAT items:1:evicted 0
+STAT items:1:evicted_time 0
+STAT items:1:outofmemory 0
+STAT items:1:tailrepairs 0
+END
+flush_all
+OK
+get Test
+END
+version
+VERSION 1.4.25
+quit
+```
