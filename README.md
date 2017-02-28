@@ -25,7 +25,7 @@ docker run -it -e CACHE_SIZE=128 \
 
 ## How to run memcached as standalone container
 
-Copy memcached-container.service to ```/usr/lib/systemd/system/``` directory
+Copy memcached-container.service to ```/usr/lib/systemd/user/``` directory
 ```bash
 sudo cp memcached-container.service /usr/lib/systemd/user/
 systemctl --user daemon-reload
