@@ -10,8 +10,13 @@ FROM fedora:26
 RUN dnf install -y --setopt=tsflags=nodocs memcached && \
     dnf -y clean all
 
+LABEL MAINTAINER "Petr Hracek" <phracek@redhat.com>
 LABEL summary="High Performance, Distributed Memory Object Cache" \
-    version="0" \
+    Name="$FGC/memcached" \
+    Version="0" \
+    Release="1.$DISTTAG" \
+    Architecture="$ARCH" \
+    Usage="docker run -p 11211:11211 f26/memcached" \
     description="memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load." \
     io.k8s.description="memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load." \
     io.k8s.diplay-name="Memcached 1.4 " \
@@ -20,7 +25,6 @@ LABEL summary="High Performance, Distributed Memory Object Cache" \
 
 ADD files /files
 ADD help.md README.md /
-LABEL MAINTAINER "Petr Hracek" <phracek@redhat.com>
 
 EXPOSE 11211
 
