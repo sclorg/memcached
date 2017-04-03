@@ -1,4 +1,4 @@
-FROM fedora:24
+FROM fedora:26
 
 # memcached image for OpenShift.
 #
@@ -11,7 +11,7 @@ RUN dnf install -y --setopt=tsflags=nodocs memcached && \
     dnf -y clean all
 
 LABEL summary="High Performance, Distributed Memory Object Cache" \
-    version="1.0" \
+    version="0" \
     description="memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load." \
     io.k8s.description="memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load." \
     io.k8s.diplay-name="Memcached 1.4 " \
@@ -19,7 +19,8 @@ LABEL summary="High Performance, Distributed Memory Object Cache" \
     io.openshift.tags="memcached"
 
 ADD files /files
-MAINTAINER "Petr Hracek" <phracek@redhat.com>
+ADD help.md README.md /
+LABEL MAINTAINER "Petr Hracek" <phracek@redhat.com>
 
 EXPOSE 11211
 
