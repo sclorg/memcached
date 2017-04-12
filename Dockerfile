@@ -7,7 +7,7 @@ FROM registry.fedoraproject.org/fedora:26
 # Ports:
 #  * 11211
 
-ENV NAME=memcached
+ENV NAME=memcached ARCH=x86_64
 LABEL MAINTAINER "Petr Hracek" <phracek@redhat.com>
 LABEL summary="High Performance, Distributed Memory Object Cache" \
     name="$FGC/$NAME" \
