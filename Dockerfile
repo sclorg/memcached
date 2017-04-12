@@ -1,4 +1,4 @@
-FROM fedora:26
+FROM registry.fedoraproject.org/fedora:26
 
 # memcached image for OpenShift.
 #
@@ -10,13 +10,13 @@ FROM fedora:26
 ENV NAME=memcached
 LABEL MAINTAINER "Petr Hracek" <phracek@redhat.com>
 LABEL summary="High Performance, Distributed Memory Object Cache" \
-    Name="$FGC/$NAME" \
-    Version="0" \
-    Release="1.$DISTTAG" \
-    Architecture="$ARCH" \
-    BZComponent=$NAME \
-    Usage="docker run -p 11211:11211 f26/memcached" \
-    Help="Runs memcached, which listens on port 11211. No dependencies. See Help File below for more details." \
+    name="$FGC/$NAME" \
+    version="0" \
+    release="1.$DISTTAG" \
+    architecture="$ARCH" \
+    com.redhat.component=$NAME \
+    usage="docker run -p 11211:11211 f26/memcached" \
+    help="Runs memcached, which listens on port 11211. No dependencies. See Help File below for more details." \
     description="memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load." \
     io.k8s.description="memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load." \
     io.k8s.diplay-name="Memcached 1.4 " \
