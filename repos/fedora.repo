@@ -1,0 +1,4 @@
+[fedora]
+name=fedora
+baseurl=https://mirrors.nic.cz/fedora/linux/development/26/Everything/x86_64/os/
+enabled=0

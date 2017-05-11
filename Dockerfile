@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:26
+FROM baseruntime/baseruntime:latest
 
 # memcached image for OpenShift.
 #
@@ -23,8 +23,10 @@ LABEL summary="High Performance, Distributed Memory Object Cache" \
     io.openshift.expose-services="11211:memcached" \
     io.openshift.tags="memcached"
 
-RUN dnf install -y --setopt=tsflags=nodocs memcached && \
-    dnf -y clean all
+COPY repos/* /etc/yum.repos.d/
+RUN microdnf --nodocs --enablerepo perl install perl && \
+    microdnf --nodocs --enablerepo memcached install memcached && \
+    microdnf -y clean all
 
 
 ADD files /files

@@ -2,7 +2,7 @@
 
 IMAGE_NAME = memcached
 
-defult: run
+default: run
 
 build:
 	docker build --tag=$(IMAGE_NAME) .

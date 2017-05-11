@@ -1,0 +1,4 @@
+[memcached]
+name=memcached
+baseurl=https://kojipkgs.fedoraproject.org/repos/module-fe6a2740256c88a4/latest/x86_64/
+enabled=0
