@@ -1,4 +1,4 @@
 [perl]
 name=perl
-baseurl=https://kojipkgs.fedoraproject.org/repos/module-fcd86adc7a9c7e0a/latest/x86_64/
+baseurl=https://kojipkgs.fedoraproject.org/compose/latest-Fedora-Modular-26/compose/Server/x86_64/os/
 enabled=0

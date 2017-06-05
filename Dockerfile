@@ -24,8 +24,7 @@ LABEL summary="High Performance, Distributed Memory Object Cache" \
     io.openshift.tags="memcached"
 
 COPY repos/* /etc/yum.repos.d/
-RUN microdnf --nodocs --enablerepo perl install perl && \
-    microdnf --nodocs --enablerepo memcached install memcached && \
+RUN microdnf --nodocs --enablerepo memcached install memcached && \
     microdnf -y clean all
 
 
