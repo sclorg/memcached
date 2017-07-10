@@ -1,4 +1,4 @@
-FROM baseruntime/baseruntime:latest
+FROM modularitycontainers/boltron-preview:latest
 
 # memcached image for OpenShift.
 #
@@ -23,10 +23,8 @@ LABEL summary="High Performance, Distributed Memory Object Cache" \
     io.openshift.expose-services="11211:memcached" \
     io.openshift.tags="memcached"
 
-COPY repos/* /etc/yum.repos.d/
-RUN microdnf --nodocs --enablerepo memcached install memcached && \
-    microdnf -y clean all
-
+RUN dnf -y --nodocs install memcached && \
+    dnf -y clean all
 
 ADD files /files
 ADD help.md README.md /

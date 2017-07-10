@@ -1,4 +1,0 @@
-[memcached]
-name=memcached
-baseurl=https://kojipkgs.fedoraproject.org/compose/latest-Fedora-Modular-26/compose/Server/x86_64/os/
-enabled=0
