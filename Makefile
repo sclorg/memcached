@@ -10,5 +10,5 @@ build:
 run: build
 	docker run -d $(IMAGE_NAME)
 
-test:
-	run_test.sh
+test: build
+	cd tests; MODULE=docker MODULEMD=$(MODULEMDURL) URL="docker=$(IMAGE_NAME)" make all

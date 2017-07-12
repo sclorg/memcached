@@ -27,7 +27,7 @@ RUN dnf -y --nodocs install memcached && \
     dnf -y clean all
 
 ADD files /files
-ADD help.md README.md /
+ADD root/help.1 /help.1
 
 EXPOSE 11211
 

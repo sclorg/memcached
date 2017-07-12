@@ -1,0 +1,60 @@
+.TH "MEMCACHED" "1" " Container Image Pages" "Petr Hracek" "February 6, 2017" 
+.nh
+.ad l
+
+
+.SH NAME
+.PP
+memcached \- High Performance, Distributed Memory Object Cache.
+
+
+.SH DESCRIPTION
+.PP
+Memcached is a high\-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
+
+.PP
+The container itself consists of:
+    \- fedora/24 base image
+    \- memcached RPM package
+
+.PP
+Files added to the container during docker build include: /files/memcached.sh
+
+
+.SH USAGE
+.PP
+To get the memcached container image on your local system, run the following:
+
+.PP
+.RS
+
+.nf
+docker pull hub.docker.io/phracek/memcached 
+
+.fi
+.RE
+
+
+.SH ENVIRONMENT VARIABLES
+.PP
+The memcached container includes the following environment variables:
+
+.PP
+CACHE\_SIZE=128
+    The variable sets size of cached used by memcached.
+
+
+.SH SECURITY IMPLICATIONS
+.PP
+Lists of security\-related attributes that are opened to the host.
+
+.PP
+\-p 11211:11211
+    Opens container port 11211 and maps it to the same port on the host.
+
+
+.SH SEE ALSO
+.PP
+Memcached page
+
+\[la]https://memcached.org/\[ra]
