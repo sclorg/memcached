@@ -2,111 +2,74 @@
 
 Memcached is High Performance, Distributed Memory Object Cache
 
-## Summary
+## How to use the container
 
-- Dockerfile - build container image with memcached.
-- openshift-template.yml - Template for OpenShift to memcached.
-
-
-## How to use the container over standard 11211 port
-
-Command for running memcached docker container:
+Pull the image from Docker Hub:
 
 ```bash
-docker run -it -e CACHE_SIZE=128 \
-    -p 11211:11211
+$ sudo docker pull modularitycontainer/haproxy
+```
+
+Run the container
+
+```bash
+docker run -it -p 11211:11211 --name memcached modularitycontainers/memcached
 ```
 
 If you would like to increase a CACHE_SIZE use environment variable -e CACHE_SIZE:
 ```bash
-docker run -it -e CACHE_SIZE=128 \
-    -p 11211:11211
+docker run -it -e CACHE_SIZE=128 -p 11211:11211 --name memcached modularitycontainers/memcached
 ```
 
-## How to run memcached as standalone container
+## A demo
 
-Copy memcached-container.service to ```/usr/lib/systemd/user/``` directory
-```bash
-sudo cp memcached-container.service /usr/lib/systemd/user/
-systemctl --user daemon-reload
-```
+Here is a simple demo how to run memcached
 
-Command for running memcached as standalone container:
-```bash
-systemctl start --user memcached-container
-```
+* Copy systemd service which will take care of memcached container: 
+   ```bash
+   $ sudo cp -av memcached-container.service /usr/lib/systemd/system/
+   $ sudo systemctl daemon-reload
+   ```
 
-## How to stop memcached as standalone container
-Command for stopping memcached as standalone container:
-```bash
-systemctl stop --user memcached-container
-```
-## How to test the memcached
+* We can start memcached now:
+  ```bash
+  $ sudo systemctl start memcached-container
+  ```
 
-Commands for testing memcached docker container:
+* You should be able to test memcached by commands (taken from http://www.journaldev.com/16/memcached-telnet-commands-with-example):
+  ```bash
+  set Test 0 100 10
+  JournalDev
+  STORED
+  get Test
+  VALUE Test 0 10
+  JournalDev
+  END
+  replace Test 0 100 4
+  Temp
+  STORED
+  get Test
+  VALUE Test 0 4
+  Temp
+  END
+  stats items
+  STAT items:1:number 1
+  STAT items:1:age 19
+  STAT items:1:evicted 0
+  STAT items:1:evicted_time 0
+  STAT items:1:outofmemory 0
+  STAT items:1:tailrepairs 0
+  END
+  flush_all
+  OK
+  get Test
+  END
+  version
+  VERSION 1.4.25
+  quit
+  ```
 
-To store data in memcached server with telnet:
-```bash
-set KEY META_DATA EXPIRY_TIME LENGTH_IN_BYTES
-```
+## Repository structure
 
-To get data
-```bash
-get KEY
-```
-
-To overwrite existing key
-```bash
-replace KEY META_DATA EXPIRE_TIME LENGTH_IN_BYTES
-```
-
-To delete key
-```bash
-delete KEY
-```
-
-To get the server statistics
-```bash
-stats
-stats items
-stats slabs
-
-```
-
-To clear the metadata statistics
-```bash
-flush all
-```
-
-Memcached Server Telnet Example (taken from http://www.journaldev.com/16/memcached-telnet-commands-with-example)
-```bash
-set Test 0 100 10
-JournalDev
-STORED
-get Test
-VALUE Test 0 10
-JournalDev
-END
-replace Test 0 100 4
-Temp
-STORED
-get Test
-VALUE Test 0 4
-Temp
-END
-stats items
-STAT items:1:number 1
-STAT items:1:age 19
-STAT items:1:evicted 0
-STAT items:1:evicted_time 0
-STAT items:1:outofmemory 0
-STAT items:1:tailrepairs 0
-END
-flush_all
-OK
-get Test
-END
-version
-VERSION 1.4.25
-quit
-```
+- Dockerfile - build container image with memcached.
+- openshift-template.yml - Template for OpenShift to memcached.
