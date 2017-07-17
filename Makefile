@@ -1,6 +1,6 @@
 .PHONY: build run defult
 
-IMAGE_NAME = memcached
+IMAGE_NAME = modularitycontainers/memcached
 
 default: run
 
