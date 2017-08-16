@@ -45,14 +45,5 @@ class SanityCheck1(module_framework.AvocadoTest):
         # print data
         s.close()
 
-    def test2(self):
-        self.start()
-        self.run("ls / | grep bin")
-
-    def test3GccSkipped(self):
-        self.cancel("gcc" not in self.getActualProfile())
-        self.start()
-        self.run("gcc -v")
-
 if __name__ == '__main__':
     main()
