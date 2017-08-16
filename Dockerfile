@@ -1,4 +1,4 @@
-FROM modularitycontainers/boltron-preview:latest
+FROM registry.fedoraproject.org/f26-modular/boltron
 
 # memcached image for OpenShift.
 #
