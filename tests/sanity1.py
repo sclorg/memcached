@@ -32,7 +32,7 @@ class SanityCheck1(module_framework.AvocadoTest):
     :avocado: enable
     """
 
-    def test1(self):
+    def smoke_test(self):
         self.start()
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect(('localhost', self.getConfig()['service']['port']))
@@ -44,15 +44,6 @@ class SanityCheck1(module_framework.AvocadoTest):
         #data = s.recv(1024)
         # print data
         s.close()
-
-    def test2(self):
-        self.start()
-        self.run("ls / | grep bin")
-
-    def test3GccSkipped(self):
-        self.cancel("gcc" not in self.getActualProfile())
-        self.start()
-        self.run("gcc -v")
 
 if __name__ == '__main__':
     main()
