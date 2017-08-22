@@ -7,7 +7,7 @@ Memcached is High Performance, Distributed Memory Object Cache
 Pull the image from Docker Hub:
 
 ```bash
-$ sudo docker pull modularitycontainer/haproxy
+$ sudo docker pull modularitycontainer/memcached
 ```
 
 Run the container
