@@ -2,14 +2,9 @@
 
 MEMCACHED_ARGS=
 
-if [[ ! -z "${DEBUG_MODE}" ]]; then
-    rpm -q syslog-ng
-    if [[ $? -ne 0 ]]; then
-        dnf -y --setopt=tsflags=nodocs install syslog-ng && \
-        dnf -y clean all
-        syslog-ng
-    fi
 
+if [[ ! -z "${MEMCACHED_DEBUG_MODE}" ]]; then
+    MEMCACHED_ARGS+=" -vv"
 fi
 
 if [[ ! -z "${MEMCACHED_CACHE_SIZE}" ]]; then
