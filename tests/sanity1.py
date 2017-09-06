@@ -32,7 +32,7 @@ class SanityCheck1(module_framework.AvocadoTest):
     :avocado: enable
     """
 
-    def smoke_test(self):
+    def test_smoke(self):
         self.start()
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect(('localhost', self.getConfig()['service']['port']))
