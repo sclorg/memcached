@@ -16,9 +16,13 @@ Run the container
 docker run -it -p 11211:11211 --name memcached modularitycontainers/memcached
 ```
 
-If you would like to increase a CACHE_SIZE use environment variable -e CACHE_SIZE:
+If you would like to change memcached options, like cache_size, connections or threads, use environment variable -e MEMCACHED_CACHE_SIZE, -e MEMCACHED_CONNECTIONS, -e MEMCACHED_THREADS respectively:
 ```bash
-docker run -it -e CACHE_SIZE=128 -p 11211:11211 --name memcached modularitycontainers/memcached
+docker run -it -p 11211:11211
+[-e MEMCACHED_CACHE_SIZE=<size_in_MB>]
+[-e MEMCACHED_CONNECTIONS=<max_simultaneous_connections>]
+[-e MEMCACHED_THREADS=<max_concurrent_threads>]
+--name memcached modularitycontainers/memcached
 ```
 
 ## A demo
