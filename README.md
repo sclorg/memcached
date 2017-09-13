@@ -16,7 +16,7 @@ Run the container
 docker run -it -p 11211:11211 --name memcached modularitycontainers/memcached
 ```
 
-If you would like to debug memcached, use container option =e MEMCACHED_DEBUG_MODE:
+If you would like to debug memcached, use container option -e MEMCACHED_DEBUG_MODE:
 ```bash
 docker run -it -p 11211:11211
 [-e MEMCACHED_DEBUG_MODE]
