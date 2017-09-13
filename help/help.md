@@ -3,7 +3,7 @@
 % February 6, 2017
 
 # NAME
-memcached - High Performance, Distributed Memory Object Cache.
+{{ spec.envvars.name }} - {{ spec.description }}
 
 # DESCRIPTION
 Memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
@@ -38,6 +38,8 @@ Lists of security-related attributes that are opened to the host.
 
 -p 11211:11211
     Opens container port 11211 and maps it to the same port on the host.
+
+{{ spec.distro_specific_help }}
 
 # SEE ALSO
 Memcached page
