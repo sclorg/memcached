@@ -2,8 +2,8 @@
 
 MEMCACHED_ARGS=
 
-
-if [[ ! -z "${MEMCACHED_DEBUG_MODE}" ]]; then
+# Test if variable is empty and set
+if [[ -n "${MEMCACHED_DEBUG_MODE}" ]]; then
     MEMCACHED_ARGS+=" -vv"
 fi
 
