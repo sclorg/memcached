@@ -7,14 +7,10 @@ specs:
         - fedora-26-x86_64
         - fedora-25-x86_64
       vendor: "Fedora Project"
-      source_url: "some.url.fedoraproject.org"
-      distro_specific_help: "Some Fedora specific help"
     centos:
       distros:
         - centos-7-x86_64
       vendor: "CentOS"
-      source_url: "some.url.centos.org"
-      distro_specific_help: "Some CentOS specific help"
   version:
     "1.14":
       version: 1.14

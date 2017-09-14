@@ -9,7 +9,7 @@ ENV NAME={{ spec.envvars.name }} \
     VERSION={{ spec.envvars.version }} \
     RELEASE={{ spec.envvars.release }} \
     ARCH={{ spec.envvars.arch }}
-LABEL {{ spec.maintainer }}
+MAINTAINER {{ spec.maintainer }}
 LABEL summary="High Performance, Distributed Memory Object Cache" \
     name="$FGC/$NAME" \
     version="0" \
@@ -33,6 +33,6 @@ ADD root/help.1 /help.1
 EXPOSE {{ spec.expose }}
 
 # memcached will be run under standard user on Fedora
-USER {{ spec.user }}
+USER 1000
 
 CMD ["/files/memcached.sh"]

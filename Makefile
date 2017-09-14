@@ -15,7 +15,7 @@ run: build
 	docker run -d $(IMAGE_NAME)
 
 debug: build
-	docker run -t -i $(IMAGE_OPTIONS) $(IMAGE_NAME) bash
+	docker run -t -i $(IMAGE_OPTIONS) -e MEMCACHED_DEBUG_MODE $(IMAGE_NAME) bash
 
 build: doc dg
 	docker build --tag=$(IMAGE_NAME) -f Dockerfile.rendered .

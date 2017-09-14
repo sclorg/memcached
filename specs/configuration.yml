@@ -4,8 +4,6 @@ expose: 11211
 
 description:  Memcached is High Performance, Distributed Memory Object Cache.
 
-user: 1000
-
 envvars:
   name: memcached
   version: 0
