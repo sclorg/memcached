@@ -2,6 +2,18 @@
 
 Memcached is High Performance, Distributed Memory Object Cache
 
+## Environment variables
+The image recognizes the following environment variables that you can set
+during initialization be passing `-e VAR=VALUE` to the Docker run command.
+
+|     Variable name        |       Description                                           |
+| :----------------------- | ----------------------------------------------------------- |
+| `MEMCACHED_DEBUG_MODE`   | Increases verbosity for server and client. Parameter is -vv |
+| `MEMCACHED_CACHE_SIZE`   | Sets the size of RAM to use for item storage (in megabytes) |
+| `MEMCACHED_CONNECTIONS`  | The max simultaneous connections; default is 1024           |
+| `MEMCACHED_THREADS`      | Sets number of threads to use to process incoming requests  |
+
+
 ## How to use the container
 
 Pull the image from Docker Hub:
@@ -16,9 +28,20 @@ Run the container
 docker run -it -p 11211:11211 --name memcached modularitycontainers/memcached
 ```
 
-If you would like to increase a CACHE_SIZE use environment variable -e CACHE_SIZE:
+If you would like to debug memcached, use container option -e MEMCACHED_DEBUG_MODE=yes:
 ```bash
-docker run -it -e CACHE_SIZE=128 -p 11211:11211 --name memcached modularitycontainers/memcached
+docker run -it -p 11211:11211
+[-e MEMCACHED_DEBUG_MODE=yes]
+--name memcached modularitycontainers/memcached
+```
+
+If you would like to change memcached options, like cache_size, connections or threads, use environment variable -e MEMCACHED_CACHE_SIZE, -e MEMCACHED_CONNECTIONS, -e MEMCACHED_THREADS respectively:
+```bash
+docker run -it -p 11211:11211
+[-e MEMCACHED_CACHE_SIZE=<size_in_MB>]
+[-e MEMCACHED_CONNECTIONS=<max_simultaneous_connections>]
+[-e MEMCACHED_THREADS=<max_concurrent_threads>]
+--name memcached modularitycontainers/memcached
 ```
 
 ## A demo

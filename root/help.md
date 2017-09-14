@@ -21,10 +21,17 @@ To get the memcached container image on your local system, run the following:
 
   
 # ENVIRONMENT VARIABLES
-The memcached container includes the following environment variables:
 
-CACHE_SIZE=128
-    The variable sets size of cached used by memcached.
+The image recognizes the following environment variables that you can set
+during initialization be passing `-e VAR=VALUE` to the Docker run command.
+
+|     Variable name        |       Description                                           |
+| :----------------------- | ----------------------------------------------------------- |
+| `MEMCACHED_DEBUG_MODE`   | Increases verbosity for server and client. Parameter is -vv |
+| `MEMCACHED_CACHE_SIZE`   | Sets the size of RAM to use for item storage (in megabytes) |
+| `MEMCACHED_CONNECTIONS`  | The max simultaneous connections; default is 1024           |
+| `MEMCACHED_THREADS`      | Sets number of threads to use to process incoming requests  |
+
         
 # SECURITY IMPLICATIONS
 Lists of security-related attributes that are opened to the host.
