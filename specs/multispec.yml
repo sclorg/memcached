@@ -5,12 +5,8 @@ specs:
     fedora:
       distros:
         - fedora-26-x86_64
-        - fedora-25-x86_64
       vendor: "Fedora Project"
-    centos:
-      distros:
-        - centos-7-x86_64
-      vendor: "CentOS"
-  version:
-    "1.14":
-      version: 1.14
+      image_name: f26/memcached
+      readme_description: >-
+        There is a detailed information about this image available in its [help
+        page](https://src.fedoraproject.org/container/tools/blob/master/f/root/help.md).

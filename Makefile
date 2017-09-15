@@ -4,11 +4,10 @@ IMAGE_NAME = modularitycontainers/memcached
 IMAGE_OPTIONS = \
     -p 127.0.0.1:11211:11211
 
-VERSION = 1.14
 DISTRO = fedora-26-x86_64
 DG = /usr/bin/dg
 
-DG_EXEC = ${DG} --distro ${DISTRO}.yaml --spec specs/configuration.yml --multispec specs/multispec.yml --multispec-selector version=${VERSION}
+DG_EXEC = ${DG} --distro ${DISTRO}.yaml --spec specs/configuration.yml --multispec specs/multispec.yml
 DISTRO_ID = $(shell ${DG_EXEC} --template "{{ config.os.id }}")
 
 run: build

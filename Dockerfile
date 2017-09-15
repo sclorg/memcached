@@ -1,4 +1,4 @@
-FROM {{ config.docker.from }}
+FROM {{ config.docker.registry }}/{{ config.docker.from }}
 
 # Environment:
 #  * $CACHE_SIZE - Cache size for memcached
