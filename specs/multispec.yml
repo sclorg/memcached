@@ -15,7 +15,7 @@ specs:
         There is a detailed information about this image available in its [help
         page](https://github.com/container-images/memcached/blob/master/help/help.md).
     downstream:
-      image_repository: "candidate-registry.fedoraproject.org/{{ config.os.id }}/{{ config.os.version }}/memcached"
+      image_repository: "candidate-registry.fedoraproject.org/f{{ config.os.version }}/memcached"
       readme_description: >-
         There is a detailed information about this image available in its [help
         page](https://src.fedoraproject.org/container/memcached/blob/master/f/root/help.1).

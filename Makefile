@@ -1,6 +1,5 @@
 .PHONY: build run default debug test doc upstream downstream
 
-IMAGE_NAME = modularitycontainers/memcached
 IMAGE_OPTIONS = \
     -p 11211:11211
 
@@ -8,17 +7,18 @@ VARIANT := upstream
 DISTRO = fedora-26-x86_64
 DG = /usr/bin/dg
 
-DG_EXEC = ${DG} --distro ${DISTRO}.yaml --spec specs/configuration.yml --multispec specs/multispec.yml --multispec-selector variant=$(VARIANT)
+DG_EXEC = ${DG} --max-passes 25 --distro ${DISTRO}.yaml --spec specs/configuration.yml --multispec specs/multispec.yml --multispec-selector variant=$(VARIANT)
 DISTRO_ID = $(shell ${DG_EXEC} --template "{{ config.os.id }}")
 
 IMAGE_REPOSITORY = $(shell ${DG_EXEC} --template "{{ spec.image_repository }}")
+
 default: run
 
 run: build
 	docker run -d $(IMAGE_REPOSITORY)
 
 debug: build
-	docker run -t -i $(IMAGE_OPTIONS) -e MEMCACHED_DEBUG_MODE $(IMAGE_NAME) bash
+	docker run -t -i $(IMAGE_OPTIONS) -e MEMCACHED_DEBUG_MODE $(IMAGE_REPOSITORY) bash
 
 build:
 	docker build --tag=$(IMAGE_REPOSITORY) -f Dockerfile.rendered .
@@ -32,11 +32,11 @@ doc: dg
 
 upstream:
 	make -e doc VARIANT="upstream"
-	make build VARIANT="upstream"
+	make VARIANT="upstream"
 
 downstream:
 	make -e doc VARIANT="downstream"
-	make build VARIANT="downstream"
+	make VARIANT="downstream"
 
 dg:
 	${DG_EXEC} --template Dockerfile --output Dockerfile.rendered
