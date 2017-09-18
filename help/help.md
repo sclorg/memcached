@@ -17,7 +17,7 @@ Files added to the container during docker build include: /files/memcached.sh
 # USAGE
 To get the memcached container image on your local system, run the following:
 
-    docker pull hub.docker.io/phracek/memcached 
+    docker pull hub.docker.io/phracek/{{ spec.envvars.name }}
 
   
 # ENVIRONMENT VARIABLES
@@ -38,8 +38,6 @@ Lists of security-related attributes that are opened to the host.
 
 -p 11211:11211
     Opens container port 11211 and maps it to the same port on the host.
-
-{{ spec.distro_specific_help }}
 
 # SEE ALSO
 Memcached page
