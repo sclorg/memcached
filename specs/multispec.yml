@@ -6,7 +6,16 @@ specs:
       distros:
         - fedora-26-x86_64
       vendor: "Fedora Project"
+  variant:
+    upstream:
+      image_name: modularitycontainers/memcached
+      readme_description: |-
+        [![Build Status](https://travis-ci.org/container-images/memcached.svg?branch=master)](https://travis-ci.org/container-images/memcached)
+
+        There is a detailed information about this image available in its [help
+        page](https://github.com/container-images/memcached/blob/master/help/help.md).
+    downstream:
       image_name: f26/memcached
       readme_description: >-
         There is a detailed information about this image available in its [help
-        page](https://src.fedoraproject.org/container/tools/blob/master/f/root/help.md).
+        page](https://src.fedoraproject.org/container/memcached/blob/master/f/root/help.1).
