@@ -4,36 +4,39 @@ IMAGE_NAME = modularitycontainers/memcached
 IMAGE_OPTIONS = \
     -p 11211:11211
 
-VARIANT = "--multispec-selector variant=upstream"
+VARIANT := upstream
 DISTRO = fedora-26-x86_64
 DG = /usr/bin/dg
 
-DG_EXEC = ${DG} --distro ${DISTRO}.yaml --spec specs/configuration.yml --multispec specs/multispec.yml $(VARIANT)
+DG_EXEC = ${DG} --distro ${DISTRO}.yaml --spec specs/configuration.yml --multispec specs/multispec.yml --multispec-selector variant=$(VARIANT)
 DISTRO_ID = $(shell ${DG_EXEC} --template "{{ config.os.id }}")
 
+IMAGE_REPOSITORY = $(shell ${DG_EXEC} --template "{{ spec.image_repository }}")
 default: run
 
 run: build
-	docker run -d $(IMAGE_NAME)
+	docker run -d $(IMAGE_REPOSITORY)
 
 debug: build
 	docker run -t -i $(IMAGE_OPTIONS) -e MEMCACHED_DEBUG_MODE $(IMAGE_NAME) bash
 
-build: doc dg
-	docker build --tag=$(IMAGE_NAME) -f Dockerfile.rendered .
+build:
+	docker build --tag=$(IMAGE_REPOSITORY) -f Dockerfile.rendered .
 
 test: build
-	cd tests; MODULE=docker DOCKERFILE="../Dockerfile.rendered" URL="docker=$(IMAGE_NAME)" mtf *.py
+	cd tests; MODULE=docker DOCKERFILE="../Dockerfile.rendered" URL="docker=$(IMAGE_REPOSITORY)" mtf *.py
 
 doc: dg
 	mkdir -p ./root/
 	go-md2man -in=help/help.md.rendered -out=./root/help.1
 
 upstream:
-	make -e doc VARIANT="--multispec-selector variant=upstream"
+	make -e doc VARIANT="upstream"
+	make build VARIANT="upstream"
 
 downstream:
-	make -e doc VARIANT="--multispec-selector variant=downstream"
+	make -e doc VARIANT="downstream"
+	make build VARIANT="downstream"
 
 dg:
 	${DG_EXEC} --template Dockerfile --output Dockerfile.rendered
