@@ -20,7 +20,7 @@ run: build
 debug: build
 	docker run -t -i $(IMAGE_OPTIONS) -e MEMCACHED_DEBUG_MODE $(IMAGE_REPOSITORY) bash
 
-build:
+build: doc
 	docker build --tag=$(IMAGE_REPOSITORY) -f Dockerfile.rendered .
 
 test: build
