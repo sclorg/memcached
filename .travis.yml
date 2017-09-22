@@ -5,8 +5,6 @@ script:
   - hooks/pre_build
   # Docker Hub hack
   - sudo cp -av ./Dockerfile.template ./Dockerfile
-  - make build
-env:
-  - DG_BINARY="docker run -v $(pwd):/var/dgdir slavek/distgen"
+  - make DG="docker run -v $(pwd):/var/dgdir slavek/distgen" GOMD2MAN="docker run -v $(pwd):/go/src/github.com/cpuguy83/go-md2man cpuguy83/go-md2man" build
 notifications:
-email: false
+    email: false

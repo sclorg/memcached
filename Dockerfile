@@ -9,7 +9,7 @@ ENV NAME={{ spec.envvars.name }} \
     VERSION={{ spec.envvars.version }} \
     RELEASE={{ spec.envvars.release }} \
     ARCH={{ spec.envvars.arch }}
-LABEL MAINTAINER {{ spec.maintainer }}
+LABEL maintainer {{ spec.maintainer }}
 LABEL summary="High Performance, Distributed Memory Object Cache" \
     name="$FGC/$NAME" \
     version="0" \
