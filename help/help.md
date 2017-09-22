@@ -3,21 +3,21 @@
 % February 6, 2017
 
 # NAME
-memcached - High Performance, Distributed Memory Object Cache.
+{{ spec.envvars.name }} - {{ spec.description }}
 
 # DESCRIPTION
 Memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
 
 The container itself consists of:
-    - fedora/24 base image
-    - memcached RPM package
+    - fedora/{{ config.os.version }} base image
+    - {{ spec.envvars.name }} RPM package
 
 Files added to the container during docker build include: /files/memcached.sh
 
 # USAGE
 To get the memcached container image on your local system, run the following:
 
-    docker pull hub.docker.io/phracek/memcached 
+    docker pull docker.io/modularitycontainers/{{ spec.envvars.name }}
 
   
 # ENVIRONMENT VARIABLES
