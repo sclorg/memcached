@@ -1,0 +1,12 @@
+sudo: required
+services:
+  - docker
+script:
+  - hooks/pre_build
+  # Docker Hub hack
+  - sudo cp -av ./Dockerfile.template ./Dockerfile
+  - make build
+env:
+  - DG_BINARY="docker run -v $(pwd):/var/dgdir slavek/distgen"
+notifications:
+email: false
