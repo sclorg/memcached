@@ -1,6 +1,6 @@
 # memcached
 
-Memcached is High Performance, Distributed Memory Object Cache
+Memcached is High Performance, Distributed Memory Object Cache.
 
 ## Environment variables
 The image recognizes the following environment variables that you can set
@@ -96,3 +96,5 @@ Here is a simple demo how to run memcached
 
 - Dockerfile - build container image with memcached.
 - openshift-template.yml - Template for OpenShift to memcached.
+
+
