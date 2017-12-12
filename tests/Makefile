@@ -1,0 +1,2 @@
+test:
+	mtf --setup --metadata
