@@ -21,10 +21,11 @@
 # Authors: Jan Scotka <jscotka@redhat.com>
 #
 
-import socket
+import pexpect
 from avocado import main
 from avocado.core import exceptions
 from moduleframework import module_framework
+from moduleframework import common
 
 
 class SanityCheck1(module_framework.AvocadoTest):
@@ -34,16 +35,15 @@ class SanityCheck1(module_framework.AvocadoTest):
 
     def test_smoke(self):
         self.start()
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect(('localhost', self.getConfig()['service']['port']))
-        s.sendall('set Test 0 100 4\r\n\n')
-        #data = s.recv(1024)
-        # print data
+        session = pexpect.spawn("telnet %s %s " % (self.ip_address,
+                                                   self.getConfig()['service']['port']))
+        session.sendline('set Test 0 100 4\r\n\n')
+        session.sendline('JournalDev\r\n\n')
+        common.print_info('Expecting STORED')
+        session.expect('STORED')
+        common.print_info('STORED was catched')
+        session.close()
 
-        s.sendall('get Test\r\n')
-        #data = s.recv(1024)
-        # print data
-        s.close()
 
 if __name__ == '__main__':
     main()
