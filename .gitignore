@@ -1,2 +1,4 @@
+Dockerfile.rendered
+help/help.md.rendered
 .idea
 *.py[oc]
