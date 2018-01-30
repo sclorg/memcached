@@ -31,16 +31,14 @@ def test_conu():
     backend = DockerBackend(logging_level=logging.DEBUG)
     i = backend.ImageClass("docker.io/modularitycontainers/memcached")
     i.pull()
-    i.get_metadata()
     rb = conu.DockerRunBuilder(command=["/files/memcached.sh"])
-    rb.build()
     c = i.run_via_binary(rb)
-    assert(c.is_running() == True)
+    assert c.is_running()
     c.wait_for_port(11211)
     session = pexpect.spawn("telnet %s 11211 " % c.get_IPv4s()[0])
     session.sendline('set Test 0 100 10')
     session.sendline('JournalDev')
-    assert (session.expect('STORED') == 0)
+    assert session.expect('STORED') == 0
     session.sendline('quit')
 
 
