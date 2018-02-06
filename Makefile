@@ -25,7 +25,8 @@ build: doc
 	docker build --tag=$(IMAGE_REPOSITORY) -f Dockerfile.rendered .
 
 test: build
-	MODULE=docker DOCKERFILE="../Dockerfile.rendered" URL="docker=$(IMAGE_REPOSITORY)" make -C tests test
+	MODULE=docker DOCKERFILE="../Dockerfile.rendered" URL="docker=$(IMAGE_REPOSITORY)" make -C tests test_mtf
+	make -C tests test_conu
 
 doc: dg
 	mkdir -p ./root/

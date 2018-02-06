@@ -18,32 +18,29 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
-# Authors: Jan Scotka <jscotka@redhat.com>
-#
 
 import pexpect
-from avocado import main
-from avocado.core import exceptions
-from moduleframework import module_framework
-from moduleframework import common
+import conu, logging
+from conu import DockerBackend
 
 
-class SanityCheck1(module_framework.AvocadoTest):
+def test_conu():
     """
-    :avocado: enable
+    Function tests memcached container with conu
     """
-
-    def test_smoke(self):
-        self.start()
-        session = pexpect.spawn("telnet %s %s " % (self.ip_address,
-                                                   self.getConfig()['service']['port']))
-        session.sendline('set Test 0 100 4\r\n\n')
-        session.sendline('JournalDev\r\n\n')
-        common.print_info('Expecting STORED')
-        session.expect('STORED')
-        common.print_info('STORED was catched')
-        session.close()
+    backend = DockerBackend(logging_level=logging.DEBUG)
+    i = backend.ImageClass("docker.io/modularitycontainers/memcached")
+    i.pull()
+    rb = conu.DockerRunBuilder(command=["/files/memcached.sh"])
+    c = i.run_via_binary(rb)
+    assert c.is_running()
+    c.wait_for_port(11211)
+    session = pexpect.spawn("telnet %s 11211 " % c.get_IPv4s()[0])
+    session.sendline('set Test 0 100 10')
+    session.sendline('JournalDev')
+    assert session.expect('STORED') == 0
+    session.sendline('quit')
 
 
 if __name__ == '__main__':
-    main()
+    test_conu()
