@@ -3,11 +3,11 @@
 document: test-metadata
 subtype: general
 download_urls:
-    generated.py: "https://raw.githubusercontent.com/container-images/memcached/master/tests/generated.py"
     sanity.py: "https://raw.githubusercontent.com/container-images/memcached/master/tests/sanity1.py"
 enable_lint: True
 import_tests:
-    - "*.py"
+    - "sanity.py"
+    - "generated.py"
 tag_filters:
     - docker,sanity
     - optional
