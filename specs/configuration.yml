@@ -2,10 +2,12 @@ maintainer: Petr Hracek <phracek@redhat.com>
 
 expose: 11211
 
-description:  Memcached is High Performance, Distributed Memory Object Cache.
+summary: High-performance memory object caching system
+description: Memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
+
 
 envvars:
   name: memcached
-  version: 0
+  version: 1.5
   release: 1
   arch: x86_64
