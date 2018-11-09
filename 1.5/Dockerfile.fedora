@@ -1,0 +1,31 @@
+FROM registry.fedoraproject.org/f29/s2i-core:latest
+
+ENV NAME=memcached \
+    VERSION=1.5
+
+LABEL maintainer Petr Hracek <phracek@redhat.com>
+LABEL summary="High-performance memory object caching system" \
+    name="$FGC/$NAME" \
+    version="0" \
+    release="1.$DISTTAG" \
+    architecture="$ARCH" \
+    com.redhat.component="$NAME-container" \
+    usage="docker run -p 11211:11211 $NAME" \
+    help="Runs memcached, which listens on port 11211. No dependencies. See Help File below for more details." \
+    description="Memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load." \
+    io.k8s.description="Memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load." \
+    io.k8s.diplay-name="memcached $VERSION" \
+    io.openshift.expose-services="11211:memcached" \
+    io.openshift.tags="memcached"
+
+EXPOSE 11211
+
+RUN dnf install -y --setopt=tsflags=nodocs memcached && \
+    rpm -V memcached && \
+    dnf clean all
+
+COPY ./root /
+
+USER memcached
+
+ENTRYPOINT ["/usr/bin/container-entrypoint"]
