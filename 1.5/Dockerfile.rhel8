@@ -1,0 +1,31 @@
+FROM rhel8
+
+ENV NAME="rhel8/memcached"
+ENV VERSION="1.5"
+ENV SUMMARY="High-performance memory object caching system"
+ENV DESCRIPTION="memcached is a high-performance, distributed memory object \
+		 caching system, generic in nature, but intended for use in \
+		 speeding up dynamic web applications by alleviating database \
+		 load."
+
+LABEL name="$NAME"
+LABEL version="$VERSION"
+LABEL summary="$SUMMARY"
+LABEL description="$DESCRIPTION"
+LABEL usage="docker run -d --name memcached -p 11211:11211 $NAME"
+
+LABEL com.redhat.component="memcached-container"
+LABEL io.k8s.description="$DESCRIPTION"
+LABEL io.k8s.display-name="memcached $VERSION"
+LABEL io.openshift.expose-services="11211:memcached"
+LABEL io.openshift.tags="memcached"
+
+EXPOSE 11211
+
+RUN dnf install -y memcached && dnf clean all
+
+COPY root /
+
+USER memcached
+
+ENTRYPOINT ["/usr/bin/container-entrypoint"]

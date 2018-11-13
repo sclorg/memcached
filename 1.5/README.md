@@ -1,98 +1,44 @@
-# memcached
+memcached container image
+=========================
 
-Memcached is High Performance, Distributed Memory Object Cache
+Description
+-----------
 
-## Environment variables
-The image recognizes the following environment variables that you can set
-during initialization be passing `-e VAR=VALUE` to the Docker run command.
+memcached is a high-performance, distributed memory object caching system,
+generic in nature, but intended for use in speeding up dynamic web applications
+by alleviating database load.
 
-|     Variable name        |       Description                                           |
-| :----------------------- | ----------------------------------------------------------- |
-| `MEMCACHED_DEBUG_MODE`   | Increases verbosity for server and client. Parameter is -vv |
-| `MEMCACHED_CACHE_SIZE`   | Sets the size of RAM to use for item storage (in megabytes) |
-| `MEMCACHED_CONNECTIONS`  | The max simultaneous connections; default is 1024           |
-| `MEMCACHED_THREADS`      | Sets number of threads to use to process incoming requests  |
+Usage
+-----
 
-
-## How to use the container
-
-Pull the image from Docker Hub:
-
-```bash
-$ sudo docker pull modularitycontainers/memcached
+```
+$ docker run -d --name memcached -p 11211:11211 rhel8/memcached
 ```
 
-Run the container
+Command-line options supported by `memcached` may be specified as arguments of
+the `run` command. For example, the following command increases the maximum
+amount of memory to 128 megabytes and enables debug messages:
 
-```bash
-docker run -it -p 11211:11211 --name memcached modularitycontainers/memcached
+```
+$ docker run -d --name memcached -p 11211:11211 rhel8/memcached -m 128 -vv
 ```
 
-If you would like to debug memcached, use container option -e MEMCACHED_DEBUG_MODE=yes:
-```bash
-docker run -it -p 11211:11211
-[-e MEMCACHED_DEBUG_MODE=yes]
---name memcached modularitycontainers/memcached
-```
+Environment variables
+---------------------
 
-If you would like to change memcached options, like cache_size, connections or threads, use environment variable -e MEMCACHED_CACHE_SIZE, -e MEMCACHED_CONNECTIONS, -e MEMCACHED_THREADS respectively:
-```bash
-docker run -it -p 11211:11211
-[-e MEMCACHED_CACHE_SIZE=<size_in_MB>]
-[-e MEMCACHED_CONNECTIONS=<max_simultaneous_connections>]
-[-e MEMCACHED_THREADS=<max_concurrent_threads>]
---name memcached modularitycontainers/memcached
-```
+`memcached` started in the container can be also configured with the
+following environment variables:
 
-## A demo
+**`MEMCACHED_MAX_MEMORY`**
+	Specify the maximum amount of memory used for object storage in
+	megabytes. The default value is 64 megabytes.
 
-Here is a simple demo how to run memcached
+**`MEMCACHED_MAX_CONNECTIONS`**
+	Specify the maximum number of client connections. The default value is
+	1024.
 
-* Copy systemd service which will take care of memcached container: 
-   ```bash
-   $ sudo cp -av memcached-container.service /usr/lib/systemd/system/
-   $ sudo systemctl daemon-reload
-   ```
+**`MEMCACHED_SLAB_PAGE_SIZE`**
+	Specify the default size of the slab page. The default value is 1m.
 
-* We can start memcached now:
-  ```bash
-  $ sudo systemctl start memcached-container
-  ```
-
-* You should be able to test memcached by commands (taken from http://www.journaldev.com/16/memcached-telnet-commands-with-example):
-  ```bash
-  set Test 0 100 10
-  JournalDev
-  STORED
-  get Test
-  VALUE Test 0 10
-  JournalDev
-  END
-  replace Test 0 100 4
-  Temp
-  STORED
-  get Test
-  VALUE Test 0 4
-  Temp
-  END
-  stats items
-  STAT items:1:number 1
-  STAT items:1:age 19
-  STAT items:1:evicted 0
-  STAT items:1:evicted_time 0
-  STAT items:1:outofmemory 0
-  STAT items:1:tailrepairs 0
-  END
-  flush_all
-  OK
-  get Test
-  END
-  version
-  VERSION 1.4.25
-  quit
-  ```
-
-## Repository structure
-
-- Dockerfile - build container image with memcached.
-- openshift-template.yml - Template for OpenShift to memcached.
+**`MEMCACHED_EXTRA_PARAMETERS`**
+	Specify any command-line options supported by `memcached`.
