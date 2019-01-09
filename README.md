@@ -1,98 +1,76 @@
-# memcached
+Memcached container images
+========================
 
-Memcached is High Performance, Distributed Memory Object Cache
+This repository contains Dockerfiles for Memcached images.
+Users can choose between RHEL, Fedora and CentOS based images.
 
-## Environment variables
-The image recognizes the following environment variables that you can set
-during initialization be passing `-e VAR=VALUE` to the Docker run command.
-
-|     Variable name        |       Description                                           |
-| :----------------------- | ----------------------------------------------------------- |
-| `MEMCACHED_DEBUG_MODE`   | Increases verbosity for server and client. Parameter is -vv |
-| `MEMCACHED_CACHE_SIZE`   | Sets the size of RAM to use for item storage (in megabytes) |
-| `MEMCACHED_CONNECTIONS`  | The max simultaneous connections; default is 1024           |
-| `MEMCACHED_THREADS`      | Sets number of threads to use to process incoming requests  |
+For more information about contributing, see
+[the Contribution Guidelines](https://github.com/sclorg/welcome/blob/master/contribution.md).
+For more information about concepts used in these container images, see the
+[Landing page](https://github.com/sclorg/welcome).
 
 
-## How to use the container
+Versions
+---------------
+Memcached versions currently supported are:
+* [1.5](https://github.com/sclorg/memcached/tree/master/1.5)
 
-Pull the image from Docker Hub:
+RHEL versions currently supported are:
+* RHEL8
 
-```bash
-$ sudo docker pull modularitycontainers/memcached
-```
 
-Run the container
+Installation
+----------------------
+*  **RHEL8 based image**
 
-```bash
-docker run -it -p 11211:11211 --name memcached modularitycontainers/memcached
-```
+    To build a RHEL8 based image, you need to run Docker build on a properly
+    subscribed RHEL machine.
 
-If you would like to debug memcached, use container option -e MEMCACHED_DEBUG_MODE=yes:
-```bash
-docker run -it -p 11211:11211
-[-e MEMCACHED_DEBUG_MODE=yes]
---name memcached modularitycontainers/memcached
-```
+    ```
+    $ git clone --recursive https://github.com/sclorg/memcached.git
+    $ cd memcached
+    $ make build TARGET=rhel8 VERSIONS=1.5
+    ```
 
-If you would like to change memcached options, like cache_size, connections or threads, use environment variable -e MEMCACHED_CACHE_SIZE, -e MEMCACHED_CONNECTIONS, -e MEMCACHED_THREADS respectively:
-```bash
-docker run -it -p 11211:11211
-[-e MEMCACHED_CACHE_SIZE=<size_in_MB>]
-[-e MEMCACHED_CONNECTIONS=<max_simultaneous_connections>]
-[-e MEMCACHED_THREADS=<max_concurrent_threads>]
---name memcached modularitycontainers/memcached
-```
+*  **Fedora based image**
 
-## A demo
+    ```
+    $ git clone --recursive https://github.com/sclorg/memcached.git
+    $ cd memcached
+    $ make build TARGET=fedora VERSIONS=1.5
+    ```
 
-Here is a simple demo how to run memcached
+**Notice: By omitting the `VERSIONS` parameter, the build/test action will be performed
+on all provided versions of Memcached.**
 
-* Copy systemd service which will take care of memcached container: 
-   ```bash
-   $ sudo cp -av memcached-container.service /usr/lib/systemd/system/
-   $ sudo systemctl daemon-reload
-   ```
+Usage
+---------------------------------
 
-* We can start memcached now:
-  ```bash
-  $ sudo systemctl start memcached-container
-  ```
+For information about usage of Dockerfile for Memcached 1.5,
+see [usage documentation](https://github.com/sclorg/memcached/tree/master/1.5).
 
-* You should be able to test memcached by commands (taken from http://www.journaldev.com/16/memcached-telnet-commands-with-example):
-  ```bash
-  set Test 0 100 10
-  JournalDev
-  STORED
-  get Test
-  VALUE Test 0 10
-  JournalDev
-  END
-  replace Test 0 100 4
-  Temp
-  STORED
-  get Test
-  VALUE Test 0 4
-  Temp
-  END
-  stats items
-  STAT items:1:number 1
-  STAT items:1:age 19
-  STAT items:1:evicted 0
-  STAT items:1:evicted_time 0
-  STAT items:1:outofmemory 0
-  STAT items:1:tailrepairs 0
-  END
-  flush_all
-  OK
-  get Test
-  END
-  version
-  VERSION 1.4.25
-  quit
-  ```
+Test
+---------------------------------
 
-## Repository structure
+This repository also provides a test framework, which checks basic functionality
+of the Memcached image.
 
-- Dockerfile - build container image with memcached.
-- openshift-template.yml - Template for OpenShift to memcached.
+*  **RHEL8 based image**
+
+    To test a RHEL8 based Memcached image, you need to run the test on a properly
+    subscribed RHEL machine.
+
+    ```
+    $ cd memcached
+    $ make test TARGET=rhel8 VERSIONS=1.5
+    ```
+
+*  **Fedora based image**
+
+    ```
+    $ cd memcached
+    $ make test TARGET=fedora VERSIONS=1.5
+    ```
+
+**Notice: By omitting the `VERSIONS` parameter, the build/test action will be performed
+on all provided versions of Memcached.**
