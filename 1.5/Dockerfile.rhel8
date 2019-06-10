@@ -12,7 +12,7 @@ LABEL name="$NAME"
 LABEL version="$VERSION"
 LABEL summary="$SUMMARY"
 LABEL description="$DESCRIPTION"
-LABEL usage="docker run -d --name memcached -p 11211:11211 $NAME"
+LABEL usage="podman run -d --name memcached -p 11211:11211 $NAME"
 
 LABEL com.redhat.component="memcached-container"
 LABEL io.k8s.description="$DESCRIPTION"
